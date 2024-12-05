@@ -2,12 +2,12 @@ package service
 
 import (
 	"encoding/json"
-	"log/slog"
-
 	"hot-coffee/internal/dal"
-	myerrors "hot-coffee/internal/myErrors"
 	"hot-coffee/internal/utils/validation"
 	"hot-coffee/models"
+	"log/slog"
+
+	myerrors "hot-coffee/internal/myErrors"
 )
 
 type InventoryService interface {
@@ -34,7 +34,8 @@ func (i *inventoryService) ServiceGetInventory() ([]byte, error) {
 
 	jsonFile, err := json.MarshalIndent(inventoryStruct, "", "  ")
 	if err != nil {
-		return nil, err
+		slog.Error("Failed to marshal", "error", err)
+		return nil, myerrors.ErrFailMarshal
 	}
 	return jsonFile, nil
 }
@@ -50,7 +51,8 @@ func (i *inventoryService) ServiceGetInventoryID(id string) ([]byte, error) {
 
 	jsonFile, err := json.MarshalIndent(inventoryStruct, "", "  ")
 	if err != nil {
-		return nil, err
+		slog.Error("Failed to marshal", "error", err)
+		return nil, myerrors.ErrFailMarshal
 	}
 	return jsonFile, nil
 }

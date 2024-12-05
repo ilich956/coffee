@@ -2,12 +2,11 @@ package dal
 
 import (
 	"encoding/json"
-	"log/slog"
-	"os"
-
 	"hot-coffee/internal/config"
 	"hot-coffee/internal/utils"
 	"hot-coffee/models"
+	"log/slog"
+	"os"
 
 	myerrors "hot-coffee/internal/myErrors"
 )

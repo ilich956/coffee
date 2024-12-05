@@ -2,15 +2,15 @@ package service
 
 import (
 	"encoding/json"
-	"log/slog"
-	"time"
-
 	"hot-coffee/internal/dal"
-	myerrors "hot-coffee/internal/myErrors"
 	"hot-coffee/internal/utils"
 	"hot-coffee/internal/utils/uuid"
 	"hot-coffee/internal/utils/validation"
 	"hot-coffee/models"
+	"log/slog"
+	"time"
+
+	myerrors "hot-coffee/internal/myErrors"
 )
 
 type OrderService interface {
@@ -109,6 +109,7 @@ func (s *orderService) ServicePostOrder(newOrderByte []byte) error {
 		for i := len(isNotExistIndex) - 1; i >= 0; i-- {
 			items = utils.DeleteElement(items, isNotExistIndex[i])
 		}
+		slog.Warn("Some items were deleted from order because they were not listed in menu")
 	}
 
 	if len(items) == 0 {
@@ -171,10 +172,53 @@ func (s *orderService) ServicePostOrder(newOrderByte []byte) error {
 
 // Close an order.
 func (s *orderService) ServicePostOrderClose(id string) error {
-	err := s.orderRepo.CloseOrder(id)
+	tempInventory, err := s.inventory.GetInventory()
+	if err != nil {
+		return err // ok
+	}
+
+	orderr, err := s.orderRepo.GetOrderID(id)
+	items := orderr.Items
+
+	for i := 0; i < len(items); i++ {
+		item := items[i]
+		menuItem, err := s.menuRepo.GetMenuID(item.ProductID)
+		if err != nil {
+			return err // ok
+		}
+
+		hasEnoughIngredients := true
+		requiredIngredients := make(map[string]float64)
+
+		for _, ingredient := range menuItem.Ingredients {
+			inventory := utils.GetInventoryID(ingredient.IngredientID, tempInventory)
+
+			requiredQty := float64(item.Quantity) * ingredient.Quantity
+			if requiredQty > inventory.Quantity {
+				hasEnoughIngredients = false
+				break
+			}
+
+			requiredIngredients[ingredient.IngredientID] += requiredQty
+		}
+
+		if !hasEnoughIngredients {
+			return myerrors.ErrNotEnoughIngridients
+		} else {
+
+			for ingID, qty := range requiredIngredients {
+				tempInventory = utils.DecreaseTemporaryStock(ingID, qty, tempInventory)
+			}
+			for _, invitem := range tempInventory {
+				err = s.inventory.UpdateInventory(invitem.IngredientID, invitem)
+			}
+		}
+	}
+	err = s.orderRepo.CloseOrder(id)
 	if err != nil {
 		return err
 	}
+
 	return nil
 }
 
@@ -199,6 +243,9 @@ func (s *orderService) ServicePutOrderID(id string, newOrderByte []byte) error {
 		return myerrors.ErrOrderClosed
 	}
 
+	newOrder.ID = checkOrder.ID
+	newOrder.Status = checkOrder.Status
+	newOrder.CreatedAt = checkOrder.CreatedAt
 	err = s.orderRepo.UpdateOrder(id, newOrder)
 	if err != nil {
 		return err

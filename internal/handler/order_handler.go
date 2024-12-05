@@ -1,13 +1,13 @@
 package handler
 
 import (
+	"hot-coffee/internal/service"
+	"hot-coffee/internal/utils/response"
+	"hot-coffee/internal/utils/validation"
 	"io"
 	"net/http"
 
 	myerrors "hot-coffee/internal/myErrors"
-	"hot-coffee/internal/service"
-	"hot-coffee/internal/utils/response"
-	"hot-coffee/internal/utils/validation"
 )
 
 type OrderHandler interface {
@@ -105,7 +105,7 @@ func (s *orderHandler) HandlePostOrderClose(w http.ResponseWriter, r *http.Reque
 		return
 	default:
 		if err != nil {
-			response.SendError(w, http.StatusInternalServerError, "Failed to close order", nil)
+			response.SendError(w, http.StatusInternalServerError, "Failed to close order", err)
 			return
 		}
 	}

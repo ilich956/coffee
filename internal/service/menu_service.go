@@ -2,12 +2,12 @@ package service
 
 import (
 	"encoding/json"
-	"log/slog"
-
 	"hot-coffee/internal/dal"
-	myerrors "hot-coffee/internal/myErrors"
 	"hot-coffee/internal/utils/validation"
 	"hot-coffee/models"
+	"log/slog"
+
+	myerrors "hot-coffee/internal/myErrors"
 )
 
 type MenuService interface {

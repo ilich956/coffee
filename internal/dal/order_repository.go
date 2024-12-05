@@ -2,13 +2,13 @@ package dal
 
 import (
 	"encoding/json"
+	"hot-coffee/internal/config"
+	"hot-coffee/internal/utils"
+	"hot-coffee/models"
 	"log/slog"
 	"os"
 
-	"hot-coffee/internal/config"
 	myerrors "hot-coffee/internal/myErrors"
-	"hot-coffee/internal/utils"
-	"hot-coffee/models"
 )
 
 type OrderRepository interface {
@@ -83,7 +83,11 @@ func (o *jsonOrderRepository) CreateOrder(newOrder models.Order) error {
 	orders = append(orders, newOrder)
 
 	filestring, _ := json.MarshalIndent(orders, "", "  ")
-	os.WriteFile(*config.Dir+"/"+o.filepath, filestring, os.ModePerm)
+	err = os.WriteFile(*config.Dir+"/"+o.filepath, filestring, os.ModePerm)
+	if err != nil {
+		slog.Error("Failed to write file", "error", err, "file path", o.filepath)
+		return myerrors.ErrFailWrite
+	}
 
 	return nil
 }

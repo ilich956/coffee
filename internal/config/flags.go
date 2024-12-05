@@ -21,6 +21,10 @@ func ParseFlags() {
 	help := flag.Bool("help", false, "Show help screen")
 	flag.Parse()
 
+	if *Dir != "data" {
+		*Dir += "/" + "data"
+	}
+
 	if *help {
 		fmt.Println(`Coffee Shop Management System
 

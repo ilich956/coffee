@@ -1,13 +1,13 @@
 package handler
 
 import (
+	"hot-coffee/internal/service"
+	"hot-coffee/internal/utils/response"
+	"hot-coffee/internal/utils/validation"
 	"io"
 	"net/http"
 
 	myerrors "hot-coffee/internal/myErrors"
-	"hot-coffee/internal/service"
-	"hot-coffee/internal/utils/response"
-	"hot-coffee/internal/utils/validation"
 )
 
 type MenuHandler interface {
@@ -76,7 +76,8 @@ func (s *menuHandler) HandlePostMenu(w http.ResponseWriter, r *http.Request) {
 		myerrors.ErrInvalidQuantity,
 		myerrors.ErrDescriptionRequired,
 		myerrors.ErrPriceRequired,
-		myerrors.ErrIngredientsRequired:
+		myerrors.ErrIngredientsRequired,
+		myerrors.ErrIDExist:
 		response.SendError(w, http.StatusBadRequest, "Failed to create menu", err)
 		return
 		////////////////////////////////////////////////////////////////////////////////////////////

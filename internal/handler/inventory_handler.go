@@ -1,13 +1,13 @@
 package handler
 
 import (
+	"hot-coffee/internal/service"
+	"hot-coffee/internal/utils/response"
+	"hot-coffee/internal/utils/validation"
 	"io"
 	"net/http"
 
 	myerrors "hot-coffee/internal/myErrors"
-	"hot-coffee/internal/service"
-	"hot-coffee/internal/utils/response"
-	"hot-coffee/internal/utils/validation"
 )
 
 type InventoryHandler interface {
@@ -74,7 +74,8 @@ func (s *inventoryHandler) HandlePostInventory(w http.ResponseWriter, r *http.Re
 	case myerrors.ErrIdRequired,
 		myerrors.ErrNameRequired,
 		myerrors.ErrInvalidQuantity,
-		myerrors.ErrUnitRequired:
+		myerrors.ErrUnitRequired,
+		myerrors.ErrIDExist:
 		response.SendError(w, http.StatusBadRequest, "Failed to create inventory", err)
 		return
 	default:

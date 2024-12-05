@@ -1,11 +1,10 @@
 package utils
 
 import (
+	"hot-coffee/internal/config"
 	"io"
 	"log/slog"
 	"os"
-
-	"hot-coffee/internal/config"
 )
 
 func ReadFile(filePath string) ([]byte, error) {

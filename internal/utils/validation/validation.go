@@ -1,10 +1,10 @@
 package validation
 
 import (
+	"hot-coffee/models"
 	"log/slog"
 
 	myerrors "hot-coffee/internal/myErrors"
-	"hot-coffee/models"
 )
 
 func IsJSON(contentType string) bool {
