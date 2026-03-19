@@ -2,13 +2,13 @@ package dal
 
 import (
 	"encoding/json"
-	"hot-coffee/internal/config"
-	"hot-coffee/internal/utils"
-	"hot-coffee/models"
 	"log/slog"
 	"os"
 
-	myerrors "hot-coffee/internal/myErrors"
+	"hot-coffee/internal/config"
+	"hot-coffee/internal/myErrors"
+	"hot-coffee/internal/utils"
+	"hot-coffee/models"
 )
 
 type MenuRepository interface {
@@ -23,8 +23,8 @@ type jsonMenuRepository struct {
 	filepath string
 }
 
-func NewMenuRepository(filepath string) MenuRepository {
-	return &jsonMenuRepository{filepath: filepath}
+func NewJsonMenuRepository() MenuRepository {
+	return &jsonMenuRepository{filepath: "menu_items.json"}
 }
 
 func (o *jsonMenuRepository) GetMenu() ([]models.MenuItem, error) {

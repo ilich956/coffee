@@ -9,12 +9,8 @@ import (
 	"net/http"
 )
 
-func StartServer() {
+func StartServer(menuRepo dal.MenuRepository, orderRepo dal.OrderRepository, inventoryRepo dal.InventoryRepository) {
 	mux := http.NewServeMux()
-
-	orderRepo := dal.NewOrderRepository("orders.json")
-	menuRepo := dal.NewMenuRepository("menu_items.json")
-	inventoryRepo := dal.NewInventoryRepository("inventory_item.json")
 
 	orderService := service.NewOrderService(orderRepo, menuRepo, inventoryRepo)
 	menuService := service.NewMenuService(menuRepo)

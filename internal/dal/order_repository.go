@@ -2,13 +2,13 @@ package dal
 
 import (
 	"encoding/json"
-	"hot-coffee/internal/config"
-	"hot-coffee/internal/utils"
-	"hot-coffee/models"
 	"log/slog"
 	"os"
 
-	myerrors "hot-coffee/internal/myErrors"
+	"hot-coffee/internal/config"
+	"hot-coffee/internal/myErrors"
+	"hot-coffee/internal/utils"
+	"hot-coffee/models"
 )
 
 type OrderRepository interface {
@@ -24,8 +24,8 @@ type jsonOrderRepository struct {
 	filepath string
 }
 
-func NewOrderRepository(filepath string) OrderRepository {
-	return &jsonOrderRepository{filepath: filepath}
+func NewJsonOrderRepository() OrderRepository {
+	return &jsonOrderRepository{filepath: "orders.json"}
 }
 
 // RETURN ERROR???

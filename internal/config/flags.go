@@ -11,13 +11,15 @@ import (
 
 // CHANGE LOGGING
 var (
-	Port *string
-	Dir  *string
+	Port    *string
+	Dir     *string
+	Storage *string
 )
 
 func ParseFlags() {
 	Port = flag.String("port", "8080", "Port number")
 	Dir = flag.String("dir", "data", "Path to the data directory")
+	Storage = flag.String("storage", "json", "Storage type (json or postgres)")
 	help := flag.Bool("help", false, "Show help screen")
 	flag.Parse()
 
@@ -29,13 +31,14 @@ func ParseFlags() {
 		fmt.Println(`Coffee Shop Management System
 
 		Usage:
-		  hot-coffee [--port <N>] [--dir <S>] 
+		  hot-coffee [--port <N>] [--dir <S>] [--storage <S>]
 		  hot-coffee --help
 		
 		Options:
 		  --help       Show this screen.
 		  --port N     Port number.
-		  --dir S      Path to the data directory.`)
+		  --dir S      Path to the data directory.
+		  --storage S  Storage type (json or postgres).`)
 
 		os.Exit(0)
 	}
@@ -45,6 +48,10 @@ func ParseFlags() {
 	}
 
 	if err := validatePort(); err != nil {
+		log.Fatal(err)
+	}
+
+	if err := validateStorage(); err != nil {
 		log.Fatal(err)
 	}
 }
@@ -69,6 +76,13 @@ func validateDir() error {
 	// }
 	if strings.Contains(*Dir, "cmd") || strings.Contains(*Dir, "internal") || strings.Contains(*Dir, "models") {
 		return fmt.Errorf("forbidden dir")
+	}
+	return nil
+}
+
+func validateStorage() error {
+	if *Storage != "json" && *Storage != "postgres" {
+		return fmt.Errorf("invalid storage type, must be json or postgres")
 	}
 	return nil
 }

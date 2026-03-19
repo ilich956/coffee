@@ -5,7 +5,9 @@ type Order struct {
 	CustomerName string      `json:"customer_name"`
 	Items        []OrderItem `json:"items"`
 	Status       string      `json:"status"`
+	TotalPrice   float64     `json:"total_price"`
 	CreatedAt    string      `json:"created_at"`
+	UpdatedAt    string      `json:"updated_at"`
 }
 
 type OrderItem struct {

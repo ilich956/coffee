@@ -5,4 +5,5 @@ type InventoryItem struct {
 	Name         string  `json:"name"`
 	Quantity     float64 `json:"quantity"`
 	Unit         string  `json:"unit"`
+	Threshold    float64 `json:"threshold"`
 }

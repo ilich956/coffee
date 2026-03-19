@@ -4,6 +4,7 @@ import "errors"
 
 var (
 	ErrNotFound      = errors.New("Not found")                     // 404
+	ErrInternal      = errors.New("Internal server error")         // 500
 	ErrFailOpenJson  = errors.New("Error with oppening json file") // 5##
 	ErrFailUnmarshal = errors.New("Failed to unmarshal")
 	ErrFailMarshal   = errors.New("Failed to marshal") // 5##

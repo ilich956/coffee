@@ -2,13 +2,13 @@ package dal
 
 import (
 	"encoding/json"
-	"hot-coffee/internal/config"
-	"hot-coffee/internal/utils"
-	"hot-coffee/models"
 	"log/slog"
 	"os"
 
-	myerrors "hot-coffee/internal/myErrors"
+	"hot-coffee/internal/config"
+	"hot-coffee/internal/myErrors"
+	"hot-coffee/internal/utils"
+	"hot-coffee/models"
 )
 
 type InventoryRepository interface {
@@ -23,8 +23,8 @@ type jsonInventoryRepository struct {
 	filepath string
 }
 
-func NewInventoryRepository(filepath string) InventoryRepository {
-	return &jsonInventoryRepository{filepath: filepath}
+func NewJsonInventoryRepository() InventoryRepository {
+	return &jsonInventoryRepository{filepath: "inventory_item.json"}
 }
 
 func (o *jsonInventoryRepository) GetInventory() ([]models.InventoryItem, error) {
