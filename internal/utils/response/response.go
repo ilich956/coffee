@@ -29,7 +29,7 @@ func SendError(w http.ResponseWriter, statusCode int, errorDescription string, e
 
 	output, err := json.MarshalIndent(error, "", "  ")
 	if err != nil {
-		slog.Error("Failed to marshal error ", err)
+		slog.Error("Failed to marshal error", "error", err)
 		http.Error(w, "Internal error", http.StatusInternalServerError)
 	}
 	w.Header().Set("Content-Type", "application/json")
@@ -44,7 +44,7 @@ func SendMessage(w http.ResponseWriter, statusCode int, messageDescription strin
 
 	output, err := json.MarshalIndent(message, "", "  ")
 	if err != nil {
-		slog.Error("Failed to marshal error ", err)
+		slog.Error("Failed to marshal error", "error", err)
 		http.Error(w, "Internal error", http.StatusInternalServerError)
 	}
 	w.Header().Set("Content-Type", "application/json")

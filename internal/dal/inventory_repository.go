@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"hot-coffee/internal/config"
-	"hot-coffee/internal/myErrors"
+	myerrors "hot-coffee/internal/myErrors"
 	"hot-coffee/internal/utils"
 	"hot-coffee/models"
 )
