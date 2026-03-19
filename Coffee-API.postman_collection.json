@@ -1,0 +1,711 @@
+{
+  "info": {
+    "name": "Coffee App API",
+    "description": "Collection for testing Coffee Shop Management API with Menu, Orders, and Inventory endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "host",
+      "value": "localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "Menu",
+      "item": [
+        {
+          "name": "Get All Menu Items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{host}}/menu",
+              "protocol": "http",
+              "host": ["{{host}}"],
+              "path": ["menu"]
+            },
+            "description": "Retrieve all menu items"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{host}}/menu",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["menu"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "[{\"product_id\":\"espresso-1\",\"name\":\"Espresso\",\"description\":\"Strong black coffee\",\"price\":2.50,\"ingredients\":[{\"ingredient_id\":\"coffee-beans\",\"quantity\":20}]}]"
+            }
+          ]
+        },
+        {
+          "name": "Get Menu Item by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{host}}/menu/espresso-1",
+              "protocol": "http",
+              "host": ["{{host}}"],
+              "path": ["menu", "espresso-1"]
+            },
+            "description": "Retrieve a specific menu item by ID"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{host}}/menu/espresso-1",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["menu", "espresso-1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\"product_id\":\"espresso-1\",\"name\":\"Espresso\",\"description\":\"Strong black coffee\",\"price\":2.50,\"ingredients\":[{\"ingredient_id\":\"coffee-beans\",\"quantity\":20}]}"
+            }
+          ]
+        },
+        {
+          "name": "Create Menu Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"product_id\":\"latte-1\",\"name\":\"Latte\",\"description\":\"Coffee with steamed milk\",\"price\":3.50,\"ingredients\":[{\"ingredient_id\":\"coffee-beans\",\"quantity\":15},{\"ingredient_id\":\"milk\",\"quantity\":200}]}"
+            },
+            "url": {
+              "raw": "http://{{host}}/menu",
+              "protocol": "http",
+              "host": ["{{host}}"],
+              "path": ["menu"]
+            },
+            "description": "Create a new menu item"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"product_id\":\"latte-1\",\"name\":\"Latte\",\"description\":\"Coffee with steamed milk\",\"price\":3.50,\"ingredients\":[{\"ingredient_id\":\"coffee-beans\",\"quantity\":15},{\"ingredient_id\":\"milk\",\"quantity\":200}]}"
+                },
+                "url": {
+                  "raw": "http://{{host}}/menu",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["menu"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\"product_id\":\"latte-1\",\"name\":\"Latte\",\"description\":\"Coffee with steamed milk\",\"price\":3.50,\"ingredients\":[{\"ingredient_id\":\"coffee-beans\",\"quantity\":15},{\"ingredient_id\":\"milk\",\"quantity\":200}]}"
+            }
+          ]
+        },
+        {
+          "name": "Update Menu Item",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"product_id\":\"espresso-1\",\"name\":\"Espresso\",\"description\":\"Strong black coffee shot\",\"price\":2.75,\"ingredients\":[{\"ingredient_id\":\"coffee-beans\",\"quantity\":20}]}"
+            },
+            "url": {
+              "raw": "http://{{host}}/menu/espresso-1",
+              "protocol": "http",
+              "host": ["{{host}}"],
+              "path": ["menu", "espresso-1"]
+            },
+            "description": "Update an existing menu item"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"product_id\":\"espresso-1\",\"name\":\"Espresso\",\"description\":\"Strong black coffee shot\",\"price\":2.75,\"ingredients\":[{\"ingredient_id\":\"coffee-beans\",\"quantity\":20}]}"
+                },
+                "url": {
+                  "raw": "http://{{host}}/menu/espresso-1",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["menu", "espresso-1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\"product_id\":\"espresso-1\",\"name\":\"Espresso\",\"description\":\"Strong black coffee shot\",\"price\":2.75,\"ingredients\":[{\"ingredient_id\":\"coffee-beans\",\"quantity\":20}]}"
+            }
+          ]
+        },
+        {
+          "name": "Delete Menu Item",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://{{host}}/menu/espresso-1",
+              "protocol": "http",
+              "host": ["{{host}}"],
+              "path": ["menu", "espresso-1"]
+            },
+            "description": "Delete a menu item"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://{{host}}/menu/espresso-1",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["menu", "espresso-1"]
+                }
+              },
+              "status": "OK",
+              "code": 200
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Get All Orders",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{host}}/orders",
+              "protocol": "http",
+              "host": ["{{host}}"],
+              "path": ["orders"]
+            },
+            "description": "Retrieve all orders"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{host}}/orders",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["orders"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "[{\"order_id\":\"order-1\",\"customer_name\":\"John Doe\",\"items\":[{\"product_id\":\"espresso-1\",\"quantity\":2}],\"status\":\"open\",\"total_price\":5.50,\"created_at\":\"2024-01-01T10:00:00Z\",\"updated_at\":\"2024-01-01T10:05:00Z\"}]"
+            }
+          ]
+        },
+        {
+          "name": "Get Order by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{host}}/orders/order-1",
+              "protocol": "http",
+              "host": ["{{host}}"],
+              "path": ["orders", "order-1"]
+            },
+            "description": "Retrieve a specific order by ID"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{host}}/orders/order-1",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["orders", "order-1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\"order_id\":\"order-1\",\"customer_name\":\"John Doe\",\"items\":[{\"product_id\":\"espresso-1\",\"quantity\":2}],\"status\":\"open\",\"total_price\":5.50,\"created_at\":\"2024-01-01T10:00:00Z\",\"updated_at\":\"2024-01-01T10:05:00Z\"}"
+            }
+          ]
+        },
+        {
+          "name": "Create Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"order_id\":\"order-2\",\"customer_name\":\"Jane Smith\",\"items\":[{\"product_id\":\"latte-1\",\"quantity\":1},{\"product_id\":\"espresso-1\",\"quantity\":1}],\"status\":\"open\",\"total_price\":6.25,\"created_at\":\"2024-01-01T11:00:00Z\",\"updated_at\":\"2024-01-01T11:00:00Z\"}"
+            },
+            "url": {
+              "raw": "http://{{host}}/orders",
+              "protocol": "http",
+              "host": ["{{host}}"],
+              "path": ["orders"]
+            },
+            "description": "Create a new order"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"order_id\":\"order-2\",\"customer_name\":\"Jane Smith\",\"items\":[{\"product_id\":\"latte-1\",\"quantity\":1},{\"product_id\":\"espresso-1\",\"quantity\":1}],\"status\":\"open\",\"total_price\":6.25,\"created_at\":\"2024-01-01T11:00:00Z\",\"updated_at\":\"2024-01-01T11:00:00Z\"}"
+                },
+                "url": {
+                  "raw": "http://{{host}}/orders",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["orders"]
+                }
+              },
+              "status": "OK",
+              "code": 200
+            }
+          ]
+        },
+        {
+          "name": "Update Order",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"order_id\":\"order-1\",\"customer_name\":\"John Doe\",\"items\":[{\"product_id\":\"espresso-1\",\"quantity\":3}],\"status\":\"open\",\"total_price\":8.25,\"created_at\":\"2024-01-01T10:00:00Z\",\"updated_at\":\"2024-01-01T10:15:00Z\"}"
+            },
+            "url": {
+              "raw": "http://{{host}}/orders/order-1",
+              "protocol": "http",
+              "host": ["{{host}}"],
+              "path": ["orders", "order-1"]
+            },
+            "description": "Update an existing order"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"order_id\":\"order-1\",\"customer_name\":\"John Doe\",\"items\":[{\"product_id\":\"espresso-1\",\"quantity\":3}],\"status\":\"open\",\"total_price\":8.25,\"created_at\":\"2024-01-01T10:00:00Z\",\"updated_at\":\"2024-01-01T10:15:00Z\"}"
+                },
+                "url": {
+                  "raw": "http://{{host}}/orders/order-1",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["orders", "order-1"]
+                }
+              },
+              "status": "OK",
+              "code": 200
+            }
+          ]
+        },
+        {
+          "name": "Close Order",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://{{host}}/orders/order-1/close",
+              "protocol": "http",
+              "host": ["{{host}}"],
+              "path": ["orders", "order-1", "close"]
+            },
+            "description": "Close an order (mark as completed)"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "http://{{host}}/orders/order-1/close",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["orders", "order-1", "close"]
+                }
+              },
+              "status": "OK",
+              "code": 200
+            }
+          ]
+        },
+        {
+          "name": "Delete Order",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://{{host}}/orders/order-1",
+              "protocol": "http",
+              "host": ["{{host}}"],
+              "path": ["orders", "order-1"]
+            },
+            "description": "Delete an order"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://{{host}}/orders/order-1",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["orders", "order-1"]
+                }
+              },
+              "status": "OK",
+              "code": 200
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Inventory",
+      "item": [
+        {
+          "name": "Get All Inventory Items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{host}}/inventory",
+              "protocol": "http",
+              "host": ["{{host}}"],
+              "path": ["inventory"]
+            },
+            "description": "Retrieve all inventory items"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{host}}/inventory",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["inventory"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "[{\"ingredient_id\":\"coffee-beans\",\"name\":\"Coffee Beans\",\"quantity\":500,\"unit\":\"grams\",\"threshold\":100}]"
+            }
+          ]
+        },
+        {
+          "name": "Get Inventory Item by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{host}}/inventory/coffee-beans",
+              "protocol": "http",
+              "host": ["{{host}}"],
+              "path": ["inventory", "coffee-beans"]
+            },
+            "description": "Retrieve a specific inventory item by ID"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{host}}/inventory/coffee-beans",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["inventory", "coffee-beans"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\"ingredient_id\":\"coffee-beans\",\"name\":\"Coffee Beans\",\"quantity\":500,\"unit\":\"grams\",\"threshold\":100}"
+            }
+          ]
+        },
+        {
+          "name": "Create Inventory Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"ingredient_id\":\"milk\",\"name\":\"Milk\",\"quantity\":1000,\"unit\":\"ml\",\"threshold\":200}"
+            },
+            "url": {
+              "raw": "http://{{host}}/inventory",
+              "protocol": "http",
+              "host": ["{{host}}"],
+              "path": ["inventory"]
+            },
+            "description": "Create a new inventory item"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"ingredient_id\":\"milk\",\"name\":\"Milk\",\"quantity\":1000,\"unit\":\"ml\",\"threshold\":200}"
+                },
+                "url": {
+                  "raw": "http://{{host}}/inventory",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["inventory"]
+                }
+              },
+              "status": "OK",
+              "code": 200
+            }
+          ]
+        },
+        {
+          "name": "Update Inventory Item",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"ingredient_id\":\"coffee-beans\",\"name\":\"Coffee Beans\",\"quantity\":450,\"unit\":\"grams\",\"threshold\":100}"
+            },
+            "url": {
+              "raw": "http://{{host}}/inventory/coffee-beans",
+              "protocol": "http",
+              "host": ["{{host}}"],
+              "path": ["inventory", "coffee-beans"]
+            },
+            "description": "Update an existing inventory item"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"ingredient_id\":\"coffee-beans\",\"name\":\"Coffee Beans\",\"quantity\":450,\"unit\":\"grams\",\"threshold\":100}"
+                },
+                "url": {
+                  "raw": "http://{{host}}/inventory/coffee-beans",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["inventory", "coffee-beans"]
+                }
+              },
+              "status": "OK",
+              "code": 200
+            }
+          ]
+        },
+        {
+          "name": "Delete Inventory Item",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://{{host}}/inventory/coffee-beans",
+              "protocol": "http",
+              "host": ["{{host}}"],
+              "path": ["inventory", "coffee-beans"]
+            },
+            "description": "Delete an inventory item"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://{{host}}/inventory/coffee-beans",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["inventory", "coffee-beans"]
+                }
+              },
+              "status": "OK",
+              "code": 200
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Reports & Analytics",
+      "item": [
+        {
+          "name": "Get Total Sales",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{host}}/reports/total-sales",
+              "protocol": "http",
+              "host": ["{{host}}"],
+              "path": ["reports", "total-sales"]
+            },
+            "description": "Retrieve total sales amount from all completed orders"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{host}}/reports/total-sales",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["reports", "total-sales"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\"total_sale\":250.75}"
+            }
+          ]
+        },
+        {
+          "name": "Get Popular Items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://{{host}}/reports/popular-items",
+              "protocol": "http",
+              "host": ["{{host}}"],
+              "path": ["reports", "popular-items"]
+            },
+            "description": "Retrieve the most popular menu items based on order quantity"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{host}}/reports/popular-items",
+                  "protocol": "http",
+                  "host": ["{{host}}"],
+                  "path": ["reports", "popular-items"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "[{\"product_id\":\"espresso-1\",\"quantity\":25},{\"product_id\":\"latte-1\",\"quantity\":18}]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

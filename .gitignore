@@ -1,0 +1,92 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.so.*
+*.dylib
+*.o
+*.a
+*.out
+
+# Go build cache
+*.test
+*.prof
+*.cover
+
+# Dependency directories
+vendor/
+go.sum
+
+# Output of the go coverage tool
+*.out
+coverage.out
+coverage.html
+
+# Go workspace file
+go.work
+go.work.sum
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.iml
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+
+# Environment and configuration files
+.env
+.env.local
+.env.*.local
+config.json
+config.yaml
+config.yml
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.backup
+*.log
+
+# OS specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+desktop.ini
+
+# Docker files (if not version controlled)
+docker-compose.override.yml
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Build output
+bin/
+dist/
+build/
+coffee
+main
+
+# Air - live reload tool
+.air.toml
+
+# Testing
+.test
+coverage/
+
+# Node modules (if applicable)
+node_modules/
+npm-debug.log
+yarn-error.log
